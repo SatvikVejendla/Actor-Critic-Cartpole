@@ -1,0 +1,41 @@
+
+```{r}
+library(rjson)
+library(ggplot2)
+```
+
+
+
+```{r}
+
+df <- fromJSON(file="results/progress.json")
+
+```
+
+```{r}
+
+
+reward <- df
+index <- 1:length(df)
+
+df <- data.frame(index, reward)
+```
+
+```{r}
+head(df)
+```
+
+```{r}
+viz <- ggplot(data=df, aes(x=index, y=reward)) +
+        geom_point() +
+        geom_line() + 
+        geom_smooth()
+
+viz
+```
+
+
+```{r}
+
+ggsave(filename="results/progress.png", plot=viz)
+```
